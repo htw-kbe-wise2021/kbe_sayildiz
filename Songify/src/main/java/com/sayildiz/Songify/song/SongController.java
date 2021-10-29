@@ -1,20 +1,25 @@
-package com.sayildiz.Songify;
+package com.sayildiz.Songify.song;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class SongController {
+    private final SongRepository repository;
+
+    SongController(SongRepository repository){
+        this.repository = repository;
+    }
 
     /**
      * GET Request handling of Songs by ID
      * @return JSON with specific Song if correct request
      */
     @GetMapping("/Songify/songs/{id}")
-    public String getSongById(){
-        return "notImplemented";
+    public Song getSongById(@PathVariable Long id){
+        return repository.findById(id)
+                .orElseThrow(() -> new SongNotFoundException(id));
     }
 
     /**
@@ -22,8 +27,8 @@ public class SongController {
      * @return JSON with all Songs if correct request
      */
     @GetMapping("/Songify/songs")
-    public String getSongs(){
-        return "notImplemented";
+    public List<Song> getSongs(){
+        return repository.findAll();
     }
 
     /**
