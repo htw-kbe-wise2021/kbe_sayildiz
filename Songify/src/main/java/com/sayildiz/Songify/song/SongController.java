@@ -9,6 +9,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping("/Songify")
 public class SongController {
     //private final SongRepository repository;
     private final SongService songService;
@@ -21,7 +22,7 @@ public class SongController {
      * GET Request handling of Songs by ID
      * @return JSON with specific Song if correct request
      */
-    @GetMapping("/Songify/songs/{id}")
+    @GetMapping("/songs/{id}")
     public Song getSongById(@PathVariable Long id){
         return songService.getSongById(id);
     }
@@ -30,7 +31,7 @@ public class SongController {
      * GET request for all Songs
      * @return JSON with all Songs if correct request
      */
-    @GetMapping("/Songify/songs")
+    @GetMapping("/songs")
     public List<Song> getSongs(){
         return songService.getAllSongs();
     }
@@ -39,7 +40,7 @@ public class SongController {
      * POST request to add a song by JSON
      * @return 201 if correct request
      */
-    @PostMapping("/Songify/songs")
+    @PostMapping("/songs")
     public ResponseEntity<?> postSong(@Validated @RequestBody Song newSong){
         if(newSong.getId() != null){
             return ResponseEntity.badRequest().body("Don't send a custom Id inside body");
@@ -52,7 +53,7 @@ public class SongController {
      * DELETE Request to delete song by ID
      * @return HTTP Code 204
      */
-    @DeleteMapping("/Songify/songs/{id}")
+    @DeleteMapping("/songs/{id}")
     public ResponseEntity<?> deleteSong(@PathVariable Long id){
         try{
             songService.deleteSongById(id);
