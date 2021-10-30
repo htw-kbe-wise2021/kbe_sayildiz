@@ -1,7 +1,7 @@
-package com.sayildiz.Songify.song;
+package com.sayildiz.Songify.song.exceptions;
 
 public class SongNotFoundException extends RuntimeException{
-    SongNotFoundException(Long id){
+    public SongNotFoundException(Long id){
         super("Could not find song with Id: " + id);
     }
 }

@@ -1,5 +1,7 @@
 package com.sayildiz.Songify.song;
 
+import com.sayildiz.Songify.song.exceptions.SongAlreadyExistsException;
+import com.sayildiz.Songify.song.exceptions.SongNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,4 +16,9 @@ public class SongControllerAdvice {
     String songNotFoundHandler(SongNotFoundException ex){
         return ex.getMessage();
     }
+
+    @ResponseBody
+    @ExceptionHandler(SongAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    String songAlreadyExistsHandler(SongAlreadyExistsException ex) { return ex.getMessage();}
 }

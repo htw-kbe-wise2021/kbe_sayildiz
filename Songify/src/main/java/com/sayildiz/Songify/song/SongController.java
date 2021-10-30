@@ -10,10 +10,11 @@ import java.util.List;
 
 @RestController
 public class SongController {
-    private final SongRepository repository;
+    //private final SongRepository repository;
+    private final SongService songService;
 
-    SongController(SongRepository repository){
-        this.repository = repository;
+    SongController(SongService songService){
+        this.songService = songService;
     }
 
     /**
@@ -22,8 +23,7 @@ public class SongController {
      */
     @GetMapping("/Songify/songs/{id}")
     public Song getSongById(@PathVariable Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new SongNotFoundException(id));
+        return songService.getSongById(id);
     }
 
     /**
@@ -32,7 +32,7 @@ public class SongController {
      */
     @GetMapping("/Songify/songs")
     public List<Song> getSongs(){
-        return repository.findAll();
+        return songService.getAllSongs();
     }
 
     /**
@@ -41,11 +41,10 @@ public class SongController {
      */
     @PostMapping("/Songify/songs")
     public ResponseEntity<?> postSong(@Validated @RequestBody Song newSong){
-        if(repository.existsByTitleAndArtist(newSong.getTitle(), newSong.getArtist())){
-            Long existingId = repository.findByTitle(newSong.getTitle()).getId();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("already exists at Songify/songs/" + existingId);
+        if(newSong.getId() != null){
+            return ResponseEntity.badRequest().body("Don't send a custom Id inside body");
         }
-        Long newId = repository.save(newSong).getId();
+        Long newId = songService.addSong(newSong);
         return ResponseEntity.created(URI.create("/Songify/songs/" + newId)).build();
     }
 
@@ -56,7 +55,7 @@ public class SongController {
     @DeleteMapping("/Songify/songs/{id}")
     public ResponseEntity<?> deleteSong(@PathVariable Long id){
         try{
-            repository.deleteById(id);
+            songService.deleteSongById(id);
             return ResponseEntity.noContent().build();
         }catch (EmptyResultDataAccessException e) {
             return ResponseEntity.noContent().build();
