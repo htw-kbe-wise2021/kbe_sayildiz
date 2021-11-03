@@ -1,9 +1,9 @@
 name: Test, Build, Deploy and Api-Test
 
 on:
-  push:
+  pull_request:
     branches:
-      - feature/RestApiForSongs
+      - develop
 defaults:
   run:
     working-directory: Songify
