@@ -1,0 +1,825 @@
+{
+	"info": {
+		"_postman_id": "2ee36569-bbac-4e8b-b57b-7b07be4baf52",
+		"name": "Songify Heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test initial State of All Songs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let initialDb = [\r",
+							"\t{\r",
+							"\t    \"id\": 10,\r",
+							"\t\t\"title\": \"Chinese Food\",\r",
+							"\t\t\"artist\": \"Alison Gold\",\r",
+							"\t\t\"label\": \"PMW Live\",\r",
+							"\t\t\"released\": 2013\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 9,\r",
+							"\t\t\"title\": \"My Humps\",\r",
+							"\t\t\"artist\": \"Black Eyed Peas\",\r",
+							"\t\t\"label\": \"Universal Music\",\r",
+							"\t\t\"released\": 2005\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 8,\r",
+							"\t\t\"title\": \"Who Let the Dogs Out?\",\r",
+							"\t\t\"artist\": \"Baha Men\",\r",
+							"\t\t\"label\": \"S-Curve\",\r",
+							"\t\t\"released\": 2000\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 7,\r",
+							"\t\t\"title\": \"What’s Up?\",\r",
+							"\t\t\"artist\": \"4 Non Blondes\",\r",
+							"\t\t\"label\": \"Interscope\",\r",
+							"\t\t\"released\": 1993\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 6,\r",
+							"\t\t\"title\": \"Achy Breaky Heart\",\r",
+							"\t\t\"artist\": \"Billy Ray Cyrus\",\r",
+							"\t\t\"label\": \"PolyGram Mercury\",\r",
+							"\t\t\"released\": 1992\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 5,\r",
+							"\t\t\"title\": \"We Built This City\",\r",
+							"\t\t\"artist\": \"Starship\",\r",
+							"\t\t\"label\": \"Grunt/RCA\",\r",
+							"\t\t\"released\": 1985\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 4,\r",
+							"\t\t\"title\": \"Sussudio\",\r",
+							"\t\t\"artist\": \"Phil Collins\",\r",
+							"\t\t\"label\": \"Virgin\",\r",
+							"\t\t\"released\": 1985\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 3,\r",
+							"\t\t\"title\": \"Muskrat Love\",\r",
+							"\t\t\"artist\": \"Captain and Tennille\",\r",
+							"\t\t\"label\": \"A&M\",\r",
+							"\t\t\"released\": 1976\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 2,\r",
+							"\t\t\"title\": \"Afternoon Delight\",\r",
+							"\t\t\"artist\": \"Starland Vocal Band\",\r",
+							"\t\t\"label\": \"Windsong\",\r",
+							"\t\t\"released\": 1976\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 1,\r",
+							"\t\t\"title\": \"MacArthur Park\",\r",
+							"\t\t\"artist\": \"Richard Harris\",\r",
+							"\t\t\"label\": \"Dunhill Records\",\r",
+							"\t\t\"released\": 1968\r",
+							"\t}\r",
+							"]\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response matches songs.json file\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.deep.members(initialDb);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Song with Id 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let intialSong = {\r",
+							"\t\t\"id\": 5,\r",
+							"\t\t\"title\": \"We Built This City\",\r",
+							"\t\t\"artist\": \"Starship\",\r",
+							"\t\t\"label\": \"Grunt/RCA\",\r",
+							"\t\t\"released\": 1985\r",
+							"\t};\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"intial song with Id 5 matches\", function () {\r",
+							"     pm.expect(pm.response.json()).to.deep.equal(intialSong);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs/5",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get non Existing Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404 Not Found\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs/345",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs",
+						"345"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post new Song Wrecking Ball",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let newSong = {\r",
+							"    \"title\": \"Wrecking Ball\",\r",
+							"    \"artist\": \"MILEY CYRUS\",\r",
+							"    \"label\": \"RCA\",\r",
+							"    \"released\": 2013\r",
+							"};\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"        pm.response.to.have.status(201);\r",
+							"    });\r",
+							"\r",
+							"pm.test(\"first post request returns location with id 11\", function () { \r",
+							"    pm.expect(pm.response.headers.get(\"Location\")).to.eql(\"/Songify/songs/11\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Wrecking Ball\",\r\n    \"artist\": \"MILEY CYRUS\",\r\n    \"label\": \"RCA\",\r\n    \"released\": 2013\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post Wrecking ball again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let newSong = {\r",
+							"    \"title\": \"Wrecking Ball\",\r",
+							"    \"artist\": \"MILEY CYRUS\",\r",
+							"    \"label\": \"RCA\",\r",
+							"    \"released\": 2013\r",
+							"};\r",
+							"\r",
+							"pm.test(\"Status code is 409\", function () {\r",
+							"        pm.response.to.have.status(409);\r",
+							"    });\r",
+							"\r",
+							"pm.test(\"already exists string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"already exists\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Wrecking Ball\",\r\n    \"artist\": \"MILEY CYRUS\",\r\n    \"label\": \"RCA\",\r\n    \"released\": 2013\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get All Songs after wrecking Ball added",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let initialDb = [\r",
+							"    { \"id\": 11,\r",
+							"        \"title\": \"Wrecking Ball\",\r",
+							"    \"artist\": \"MILEY CYRUS\",\r",
+							"    \"label\": \"RCA\",\r",
+							"    \"released\": 2013},\r",
+							"\t{\r",
+							"\t    \"id\": 10,\r",
+							"\t\t\"title\": \"Chinese Food\",\r",
+							"\t\t\"artist\": \"Alison Gold\",\r",
+							"\t\t\"label\": \"PMW Live\",\r",
+							"\t\t\"released\": 2013\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 9,\r",
+							"\t\t\"title\": \"My Humps\",\r",
+							"\t\t\"artist\": \"Black Eyed Peas\",\r",
+							"\t\t\"label\": \"Universal Music\",\r",
+							"\t\t\"released\": 2005\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 8,\r",
+							"\t\t\"title\": \"Who Let the Dogs Out?\",\r",
+							"\t\t\"artist\": \"Baha Men\",\r",
+							"\t\t\"label\": \"S-Curve\",\r",
+							"\t\t\"released\": 2000\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 7,\r",
+							"\t\t\"title\": \"What’s Up?\",\r",
+							"\t\t\"artist\": \"4 Non Blondes\",\r",
+							"\t\t\"label\": \"Interscope\",\r",
+							"\t\t\"released\": 1993\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 6,\r",
+							"\t\t\"title\": \"Achy Breaky Heart\",\r",
+							"\t\t\"artist\": \"Billy Ray Cyrus\",\r",
+							"\t\t\"label\": \"PolyGram Mercury\",\r",
+							"\t\t\"released\": 1992\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 5,\r",
+							"\t\t\"title\": \"We Built This City\",\r",
+							"\t\t\"artist\": \"Starship\",\r",
+							"\t\t\"label\": \"Grunt/RCA\",\r",
+							"\t\t\"released\": 1985\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 4,\r",
+							"\t\t\"title\": \"Sussudio\",\r",
+							"\t\t\"artist\": \"Phil Collins\",\r",
+							"\t\t\"label\": \"Virgin\",\r",
+							"\t\t\"released\": 1985\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 3,\r",
+							"\t\t\"title\": \"Muskrat Love\",\r",
+							"\t\t\"artist\": \"Captain and Tennille\",\r",
+							"\t\t\"label\": \"A&M\",\r",
+							"\t\t\"released\": 1976\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 2,\r",
+							"\t\t\"title\": \"Afternoon Delight\",\r",
+							"\t\t\"artist\": \"Starland Vocal Band\",\r",
+							"\t\t\"label\": \"Windsong\",\r",
+							"\t\t\"released\": 1976\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 1,\r",
+							"\t\t\"title\": \"MacArthur Park\",\r",
+							"\t\t\"artist\": \"Richard Harris\",\r",
+							"\t\t\"label\": \"Dunhill Records\",\r",
+							"\t\t\"released\": 1968\r",
+							"\t}\r",
+							"]\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response matches songs.json file\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.deep.members(initialDb);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE new Song WreckingBall",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs/11",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Song with non Existing Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs/325",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs",
+						"325"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "intialStatus after delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let initialDb = [\r",
+							"\t{\r",
+							"\t    \"id\": 10,\r",
+							"\t\t\"title\": \"Chinese Food\",\r",
+							"\t\t\"artist\": \"Alison Gold\",\r",
+							"\t\t\"label\": \"PMW Live\",\r",
+							"\t\t\"released\": 2013\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 9,\r",
+							"\t\t\"title\": \"My Humps\",\r",
+							"\t\t\"artist\": \"Black Eyed Peas\",\r",
+							"\t\t\"label\": \"Universal Music\",\r",
+							"\t\t\"released\": 2005\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 8,\r",
+							"\t\t\"title\": \"Who Let the Dogs Out?\",\r",
+							"\t\t\"artist\": \"Baha Men\",\r",
+							"\t\t\"label\": \"S-Curve\",\r",
+							"\t\t\"released\": 2000\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 7,\r",
+							"\t\t\"title\": \"What’s Up?\",\r",
+							"\t\t\"artist\": \"4 Non Blondes\",\r",
+							"\t\t\"label\": \"Interscope\",\r",
+							"\t\t\"released\": 1993\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 6,\r",
+							"\t\t\"title\": \"Achy Breaky Heart\",\r",
+							"\t\t\"artist\": \"Billy Ray Cyrus\",\r",
+							"\t\t\"label\": \"PolyGram Mercury\",\r",
+							"\t\t\"released\": 1992\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 5,\r",
+							"\t\t\"title\": \"We Built This City\",\r",
+							"\t\t\"artist\": \"Starship\",\r",
+							"\t\t\"label\": \"Grunt/RCA\",\r",
+							"\t\t\"released\": 1985\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 4,\r",
+							"\t\t\"title\": \"Sussudio\",\r",
+							"\t\t\"artist\": \"Phil Collins\",\r",
+							"\t\t\"label\": \"Virgin\",\r",
+							"\t\t\"released\": 1985\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 3,\r",
+							"\t\t\"title\": \"Muskrat Love\",\r",
+							"\t\t\"artist\": \"Captain and Tennille\",\r",
+							"\t\t\"label\": \"A&M\",\r",
+							"\t\t\"released\": 1976\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 2,\r",
+							"\t\t\"title\": \"Afternoon Delight\",\r",
+							"\t\t\"artist\": \"Starland Vocal Band\",\r",
+							"\t\t\"label\": \"Windsong\",\r",
+							"\t\t\"released\": 1976\r",
+							"\t},\r",
+							"\t{\r",
+							"\t\t\"id\": 1,\r",
+							"\t\t\"title\": \"MacArthur Park\",\r",
+							"\t\t\"artist\": \"Richard Harris\",\r",
+							"\t\t\"label\": \"Dunhill Records\",\r",
+							"\t\t\"released\": 1968\r",
+							"\t}\r",
+							"]\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response matches songs.json file\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.deep.members(initialDb);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs/einvalsadkjö",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs",
+						"einvalsadkjö"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request has typo in \"title\"",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titl\": \"Wrecking Ball\",\r\n    \"artist\": \"MILEY CYRUS\",\r\n    \"label\": \"RCA\",\r\n    \"relased\": 2013\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request has invalid json (ends with comma)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Wrecking Ball\",\r\n    \"artist\": \"MILEY CYRUS\",\r\n    \"label\": \"RCA\",\r\n    \"relased\": 2013,\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request has empty released field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Wrecking Ball\",\r\n    \"artist\": \"MILEY CYRUS\",\r\n    \"label\": \"RCA\",\r\n    \"relased\": \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request missing \"label\"",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Wrecking Ball\",\r\n    \"artist\": \"MILEY CYRUS\",\r\n    \"relased\": 2013\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
