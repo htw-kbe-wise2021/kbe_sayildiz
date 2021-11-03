@@ -3,15 +3,21 @@ package com.sayildiz.Songify.song;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 public class Song implements Comparable<Song>{
     private @Id
     @GeneratedValue Long id;
+
+    @NotNull
     private String title;
+    @NotNull
     private String artist;
+    @NotNull
     private String label;
+    @NotNull
     private int released;
 
     public Song(Long id, String title, String artist, String label, int released) {

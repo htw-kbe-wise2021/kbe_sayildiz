@@ -648,6 +648,178 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "request has typo in \"title\"",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titl\": \"Wrecking Ball\",\r\n    \"artist\": \"MILEY CYRUS\",\r\n    \"label\": \"RCA\",\r\n    \"relased\": 2013\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request has invalid json (ends with comma)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Wrecking Ball\",\r\n    \"artist\": \"MILEY CYRUS\",\r\n    \"label\": \"RCA\",\r\n    \"relased\": 2013,\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request has empty released field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Wrecking Ball\",\r\n    \"artist\": \"MILEY CYRUS\",\r\n    \"label\": \"RCA\",\r\n    \"relased\": \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request missing \"label\"",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Wrecking Ball\",\r\n    \"artist\": \"MILEY CYRUS\",\r\n    \"relased\": 2013\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kbe-songify.herokuapp.com/Songify/songs",
+					"protocol": "https",
+					"host": [
+						"kbe-songify",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"Songify",
+						"songs"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
